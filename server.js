@@ -2,7 +2,7 @@ const express = require('express');
 
 const server = express();
 
-server.get('/', logger, (req, res) => {
+server.get('/', (req, res) => {
 
   res.status(200).send(`<h2>Let's write some middleware!</h2>`);
 });
@@ -21,15 +21,15 @@ function logger(req, res, next) {
   let code = res.statusCode
 
   if (code.toString()[0] === '2') {
-    console.log(`${req.method} ${req.url} ${colors.green}${code}${colors.noColor}`)
+    console.info(`${req.method} ${req.url} ${colors.green}${code}${colors.noColor}`)
   } else if (code.toString()[0] === '3') {
-    console.log(`${req.method} ${req.url} ${colors.blue}${code}${colors.noColor}`)
+    console.info(`${req.method} ${req.url} ${colors.blue}${code}${colors.noColor}`)
   } else if (code.toString()[0] === '4') {
-    console.log(`${req.method} ${req.url} ${colors.yellow}${code}${colors.noColor}`)
+    console.info(`${req.method} ${req.url} ${colors.yellow}${code}${colors.noColor}`)
   } else if (code.toString()[0] === '5') {
-    console.log(`${req.method} ${req.url} ${colors.red}${code}${colors.noColor}`)
+    console.info(`${req.method} ${req.url} ${colors.red}${code}${colors.noColor}`)
   } else {
-    console.log(`${req.method} ${req.url} ${code}`)
+    console.info(`${req.method} ${req.url} ${code}`)
   }
 
   next()
